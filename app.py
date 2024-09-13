@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 from models import db, User, Post
 from forms import RegistrationForm, LoginForm 
 from datetime import datetime, timezone
+import os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///newflask.db'
@@ -124,4 +125,5 @@ def logout():
     return redirect(url_for('index'))
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
