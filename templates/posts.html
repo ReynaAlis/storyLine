@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+StoryLine - Статьи
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Статьи</h1>
+
+    <div class="row">
+        {% if posts %}
+        {% for post in posts %}
+        <div class="col-sm-12 col-md-6">
+            <div class="card р-100 mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <div class="card-text">{{ post.text | safe }}</div>
+                    <p class="card-text">
+                        <small class="text-muted">
+                            Автор: {{ post.author }} | Опубликовано: {{ post.date_posted.strftime('%d %b %Y') }}
+                        </small>
+                    </p>
+                    <a href="/post/{{ post.id }}" class="btn btn-warning">Читать далее</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <div class="col-12">
+            <p>На данный момент статей нет :(</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

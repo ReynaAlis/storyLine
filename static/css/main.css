@@ -1,0 +1,147 @@
+/* Общие стили */
+* {
+    box-sizing: border-box;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content {
+    flex: 1;
+    padding: 40px 20px;
+}
+
+/* Шапка */
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: #343a40;
+    padding: 10px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.header__logo {
+    width: 48px;
+    height: 48px;
+}
+
+header .form-control {
+    width: 200px;
+    min-width: 150px;
+}
+
+header .btn {
+    padding: 10px 30px;
+}
+
+/* Контейнер */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Карточка статьи */
+.card-body:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.card-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 3em;
+}
+
+.card-text p, .card-text h1, .card-text h2, .card-text h3, .card-text h4, .card-text h5, .card-text h6,
+.card-text ul, .card-text ol {
+    margin: 0;
+    padding: 0;
+}
+
+.card-text ul, .card-text ol {
+    list-style-position: inside;
+}
+
+.card-text p {
+    margin-bottom: 0.5rem;
+}
+
+/* Формы */
+.custom-form {
+    max-width: 800px;
+    width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+/* Формы - инпуты */
+.form-control {
+    width: 100%;
+    min-width: 300px;
+    padding: 10px;
+}
+
+textarea.form-control {
+    min-height: 150px;
+}
+
+button[type="submit"] {
+    margin-top: 20px;
+}
+
+/* Рамка вокруг результатов поиска */
+.search-result-box {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    background-color: #fff;
+    transition: box-shadow 0.3s ease;
+    overflow: hidden;
+}
+
+.search-result-box:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* Футер */
+footer {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    margin-top: auto;
+    /* Футер всегда находится внизу */
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .custom-form {
+        max-width: 100%;
+    }
+
+    .form-control {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 375px) {
+    footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    footer .nav {
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    footer p, footer a {
+        margin-bottom: 10px;
+    }
+}

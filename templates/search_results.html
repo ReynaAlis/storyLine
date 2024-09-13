@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Результаты поиска для "{{ query }}"</h2>
+
+{% if results %}
+<div class="container mt-5">
+    <h2>Результаты поиска</h2>
+
+    <div class="row">
+        {% if results %}
+        {% for result in results %}
+        <div class="col-12 mb-4">
+            <!-- Контейнер для каждого результата поиска с классом для рамки -->
+            <div class="search-result-box p-3">
+                <h5>{{ result.title }}</h5>
+                <div class="card-text mb-2">{{ result.text[:100] | safe }}...</div>
+                <a href="/post/{{ result.id }}" class="btn btn-warning">Читать далее</a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>Ничего не найдено.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% else %}
+<p>Ничего не найдено.</p>
+{% endif %}
+{% endblock %}

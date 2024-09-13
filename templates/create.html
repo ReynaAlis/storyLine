@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+StoryLine - Добавить запись
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center">Добавление записи</h2>
+
+    <form method="POST" action="/create" class="custom-form">
+        <div class="mb-3">
+            <label for="title" class="form-label">Заголовок</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ title }}"
+                placeholder="Введите заголовок">
+        </div>
+        <div class="mb-3">
+            <label for="text" class="form-label">Текст статьи</label>
+            <textarea class="form-control" id="text" name="text" rows="5"
+                placeholder="Введите текст статьи">{{ text }}</textarea>
+        </div>
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-warning">Добавить статью</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
+

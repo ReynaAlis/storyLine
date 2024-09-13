@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+StoryLine - платформа для публикации историй и статей
+{% endblock %}
+
+{% block content %}
+<div class="container text-center py-5">
+    <h1 class="display-4 fw-bold py-3">Добро пожаловать в <span class="text-warning">StoryLine!</span></h1>
+    <p class="lead mt-4">Ваше пространство для идей и статей. Делитесь своими мыслями, историями и идеями с миром.
+    Находите единомышленников и создавайте уникальный контент на нашей платформе. <strong>StoryLine</strong> — это
+    место, где каждая история находит своего читателя.</p>
+
+    <div class="custom-btn-group d-flex flex-column flex-md-row align-items-center justify-content-center gap-2 mt-5">
+        {% if session.get('user_id') %}
+        <a href="{{ url_for('create') }}" class="btn custom-btn btn-warning btn-lg">Добавить статью</a>
+        {% else %}
+        <a href="{{ url_for('register') }}" class="btn custom-btn btn-warning btn-lg">Начать писать</a>
+        {% endif %}
+        <a href="/posts" class="btn custom-btn btn-outline-warning btn-lg">Исследовать статьи</a>
+    </div>
+</div>
+
+{% endblock %}

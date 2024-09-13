@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css')}}">
+</head>
+
+<body class="bg-light text-dark">
+    <div class="page">
+        <header class="p-3 text-bg-dark">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <img class="header__logo" src="{{ url_for('static', filename='image/logo.png')}}" alt="Логотип">
+                    </a>
+
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="{{ url_for('index')}}" class="nav-link px-2 text-secondary">Главная</a></li>
+                        <li><a href="{{ url_for('posts')}}" class="nav-link px-2 text-white">Статьи</a></li>
+                        <li><a href="{{ url_for('create') }}" class="nav-link px-2 text-white">Добавить статью</a></li>
+                    </ul>
+
+                    <div class="d-flex flex-column flex-md-row align-items-center gap-2">
+                        <form action="/search" method="GET" class="d-flex">
+                            <input class="form-control" type="search" name="query" placeholder="Поиск"
+                                aria-label="Поиск"
+                                onkeydown="if(event.key === 'Enter'){this.form.submit(); return false;}">
+                        </form>
+
+                        <div class="d-flex align-items-center gap-2">
+                            {% if session.get('user_id') %}
+                            <span class="me-2">Привет, {{ session.get('username') }}!</span>
+                            <a href="{{ url_for('logout') }}" class="btn btn-outline-light">Выйти</a>
+                            {% else %}
+                            <a href="{{ url_for('login') }}" class="btn btn-outline-light">Войти</a>
+                            <a href="{{ url_for('register') }}" class="btn btn-warning">Регистрация</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+
+        <main class="content">
+            {% block content %}{% endblock %}
+        </main>
+
+        <footer class="d-flex flex-wrap justify-content-between align-items-center p-4 my-4 border-top">
+            <p class="col-md-4 mb-0 text-body-secondary text-center text-md-start">© 2024 <span
+                    class="text-warning">StoryLine</span></p>
+
+            <ul class="nav col-md-4 justify-content-center justify-content-md-end">
+                <li class="nav-item"><a href="{{ url_for('index')}}"
+                        class="nav-link px-2 text-body-secondary">Главная</a></li>
+                <li class="nav-item"><a href="{{ url_for('posts')}}"
+                        class="nav-link px-2 text-body-secondary">Статьи</a></li>
+                <li class="nav-item"><a href="{{ url_for('create')}}" class="nav-link px-2 text-body-secondary">Добавить
+                        статью</a></li>
+            </ul>
+        </footer>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Подключение CKEditor -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/35.3.0/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#text'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+</body>
+
+</html>
